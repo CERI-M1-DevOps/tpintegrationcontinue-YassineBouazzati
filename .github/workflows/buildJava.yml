@@ -1,6 +1,5 @@
 name: Java CI with Maven - Test and package
 
-# Le workflow se déclenche lors d'une pull request sur la branche main
 on:
   pull_request:
     branches:
@@ -9,12 +8,12 @@ on:
 jobs:
   build:
     name: Build and Test
-    runs-on: ubuntu-latest  # Utilise la dernière version d'Ubuntu
+    runs-on: ubuntu-latest  
 
     steps:
       # 1. Étape : Vérification du dépôt
       - name: Checkout repository
-        uses: actions/checkout@v4  # Utilise l'action checkout pour se placer dans le dépôt
+        uses: actions/checkout@v4 
 
       # 2. Étape : Configuration de Java 21 avec la distribution corretto
       - name: Set up JDK 21
@@ -23,6 +22,10 @@ jobs:
           java-version: '21'
           distribution: 'corretto' 
 
-      # 3. Étape : Construction et tests du package avec Maven
-      - name: Build and package with Maven
-        run: mvn -B package  
+      # 3. Étape : Construction, tests et analyse de la qualité avec Maven et SonarQube
+      - name: Build, test and analyze with Maven and SonarQube
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.projectKey=$(echo ${{ github.repository }} | sed 's-/-_-') \
+          -Dsonar.login=$SONAR_TOKEN  
