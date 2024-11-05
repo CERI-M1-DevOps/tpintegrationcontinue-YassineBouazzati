@@ -23,9 +23,10 @@ jobs:
           distribution: 'corretto' 
 
       # 3. Étape : Construction, tests et analyse de la qualité avec Maven et SonarQube
-      - name: Build, test and analyze with Maven and SonarQube
+      - name: Build and analyze
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
-          run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CERI-M1-DevOps_tpintegrationcontinue-YassineBouazzati
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CERI-M1-DevOps_tpintegrationcontinue-YassineBouazzati
 
           
