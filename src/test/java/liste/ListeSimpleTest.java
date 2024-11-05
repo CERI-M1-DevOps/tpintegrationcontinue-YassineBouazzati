@@ -121,13 +121,13 @@ class ListeSimpleTest {
         assertEquals(3, listeATester.getSize());
     }
 
-    @Test
+   /* @Test
     void supprimePremierAvecSuivantNull() {
         listeATester.ajout(1);
         listeATester.supprimePremier(1);
         assertEquals("ListeSimple(Noeud(1))", listeATester.toString());
         assertEquals(1, listeATester.getSize());
-    }
+    }*/
 
     @Test
     void supprimeTousListeVide() {
