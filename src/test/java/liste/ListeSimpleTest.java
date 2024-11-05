@@ -63,13 +63,13 @@ class ListeSimpleTest {
         assertEquals(4, listeATester.tete.getSuivant().getElement());
     }
 
- /*   @Test
+    @Test
     void modifiePremierAvecSuivantNull() {
         listeATester.ajout(1);
         listeATester.modifiePremier(1, 2);
         assertEquals("ListeSimple(Noeud(1))", listeATester.toString());
         assertEquals(1, listeATester.getSize());
-    }*/
+    }
 
     @Test
     void modifieTous() {
