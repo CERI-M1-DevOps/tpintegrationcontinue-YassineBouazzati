@@ -24,6 +24,7 @@ public class ListeSimple {
         size++;
     }
 
+
     /**
      * Modifie la première occurrence d'un élément donné avec une nouvelle valeur.
      * @param element l'élément à rechercher.
