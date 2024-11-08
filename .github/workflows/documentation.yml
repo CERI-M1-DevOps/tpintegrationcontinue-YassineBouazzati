@@ -34,4 +34,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}  # Utilisation du jeton GitHub pour l'authentification
-          publish_dir: target/site/apidocs  # Le répertoire où Maven place la documentation générée
+          publish_dir: target/report/apidocs  # Le répertoire où Maven place la documentation générée
