@@ -30,8 +30,16 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+      # 4. Étape : Mise en cache des paquets SonarQube
+      - name: Cache SonarQube packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonarqube-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-sonarqube-
 
-      # 4. Étape : Construction, tests et analyse de la qualité avec Maven et SonarQube
+      # 5. Étape : Construction, tests et analyse de la qualité avec Maven et SonarQube
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
