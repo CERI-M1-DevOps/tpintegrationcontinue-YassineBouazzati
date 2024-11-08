@@ -1,0 +1,37 @@
+name: Deploy Documentation to GitHub Pages
+
+on:
+  pull_request:
+    types:
+      - closed  # Le pipeline se déclenche lorsque la PR est fermée
+    branches:
+      - main  # Se déclenche uniquement sur la branche `main`
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+
+    if: github.event.pull_request.merged == true  # Vérifie si la PR a été fusionnée
+
+    steps:
+      # 1. Checkout du code source
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Setup JDK 21 (pour générer la documentation)
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+
+      # 3. Génération de la documentation avec Maven
+      - name: Generate Javadoc
+        run: mvn -B javadoc:javadoc
+
+      # 4. Déploiement de la documentation sur GitHub Pages
+      - name: Deploy Javadoc to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.GITHUB_TOKEN }}  # Utilisation du jeton GitHub pour l'authentification
+          publish_dir: target/site/apidocs  # Le répertoire où Maven place la documentation générée
