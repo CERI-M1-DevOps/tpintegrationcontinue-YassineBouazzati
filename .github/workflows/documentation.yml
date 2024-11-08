@@ -33,5 +33,5 @@ jobs:
       - name: Deploy Javadoc to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}  # Utilisation du jeton GitHub pour l'authentification
-          publish_dir: target/report/apidocs  # Le répertoire où Maven place la documentation générée
+          github_token: ${{ secrets.PERS }}  # Utilisation du jeton GitHub pour l'authentification
+          publish_dir: target/reports/apidocs  # Le répertoire où Maven place la documentation générée
