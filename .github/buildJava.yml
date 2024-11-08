@@ -20,9 +20,18 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'corretto' 
+          distribution: 'corretto'
 
-      # 3. Étape : Construction, tests et analyse de la qualité avec Maven et SonarQube
+      # 3. Étape : Mise en cache des dépendances Maven
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # 4. Étape : Construction, tests et analyse de la qualité avec Maven et SonarQube
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
