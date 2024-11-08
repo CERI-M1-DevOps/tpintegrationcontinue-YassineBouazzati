@@ -1,18 +1,34 @@
 package liste;
 
+/**
+ * Classe représentant une liste chaînée simple d'entiers avec plusieurs opérations pour gérer les éléments.
+ */
 public class ListeSimple {
     private long size;
     Noeud tete;
 
+    /**
+     * Retourne la taille actuelle de la liste.
+     * @return le nombre d'éléments dans la liste.
+     */
     public long getSize() {
         return size;
     }
 
+    /**
+     * Ajoute un nouvel élément au début de la liste.
+     * @param element l'entier à ajouter.
+     */
     public void ajout(int element) {
         tete = new Noeud(element, tete);
         size++;
     }
 
+    /**
+     * Modifie la première occurrence d'un élément donné avec une nouvelle valeur.
+     * @param element l'élément à rechercher.
+     * @param nouvelleValeur la nouvelle valeur pour remplacer l'élément trouvé.
+     */
     public void modifiePremier(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null && courant.getElement() != element)
