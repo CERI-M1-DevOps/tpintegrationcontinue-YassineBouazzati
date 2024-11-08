@@ -120,6 +120,7 @@ class ListeSimpleTest {
         assertEquals(3, listeATester.getSize());
     }
 
+
     @Test
     void supprimePremierAvecSuivantNull() {
         listeATester.ajout(1);
